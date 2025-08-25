@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantZ Week 1: Foundations of Quantitative Finance | Fall 2025</title>
+    <link rel="stylesheet" href="week1-styles.css">
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="QuantZ 4K.png" alt="QuantZ Logo" class="logo">
+            <div class="header-text">
+                <h1>QuantZ Fall 2025 - Week 1</h1>
+                <p class="subtitle">Foundations of Quantitative Finance</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#welcome">Welcome</a></li>
+                <li><a href="#core-pillars">Core Pillars</a></li>
+                <li><a href="#mathematical">Mathematical Frameworks</a></li>
+                <li><a href="#applications">Applications</a></li>
+                <li><a href="#numerical">Numerical Methods</a></li>
+                <li><a href="#microstructure">Market Reality</a></li>
+                <li><a href="#case-studies">Case Studies</a></li>
+                <li><a href="#practice">Practice</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Welcome & Context Section -->
+        <section id="welcome" class="section">
+            <h2>Welcome & Context</h2>
+            <div class="welcome-grid">
+                <div class="welcome-card">
+                    <h3>🏛️ Firm Philosophy</h3>
+                    <p>Quantitative finance combines rigorous mathematical modeling with practical market insights. Our approach emphasizes precision, innovation, and the relentless pursuit of alpha through systematic strategies.</p>
+                    <ul>
+                        <li><strong>Precision:</strong> Mathematical rigor in every model</li>
+                        <li><strong>Speed:</strong> Computational efficiency as competitive advantage</li>
+                        <li><strong>Innovation:</strong> Continuous research and development</li>
+                    </ul>
+                </div>
+                <div class="welcome-card">
+                    <h3>🎯 Role of Quants</h3>
+                    <p>Quantitative analysts serve as the bridge between theoretical finance and practical trading, spanning multiple critical functions:</p>
+                    <ul>
+                        <li><strong>Trading:</strong> Algorithm development and execution</li>
+                        <li><strong>Research:</strong> Model development and validation</li>
+                        <li><strong>Risk Management:</strong> Portfolio optimization and hedging</li>
+                    </ul>
+                </div>
+                <div class="welcome-card">
+                    <h3>⚡ Competitive Edge</h3>
+                    <p>In modern markets, success depends on three fundamental advantages:</p>
+                    <ul>
+                        <li><strong>Speed:</strong> Microsecond execution and low-latency systems</li>
+                        <li><strong>Rigor:</strong> Statistically sound models and backtesting</li>
+                        <li><strong>Innovation:</strong> Novel approaches to market inefficiencies</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Pillars Section -->
+        <section id="core-pillars" class="section">
+            <h2>Core Pillars of Quantitative Finance</h2>
+            
+            <div class="pillar-container">
+                <h3>🚫 No-Arbitrage Principle</h3>
+                <p>The foundation of modern finance theory: in efficient markets, risk-free profit opportunities cannot persist.</p>
+                
+                <div class="concept-explanation">
+                    <div class="concept-text">
+                        <h4>Historical Roots</h4>
+                        <p>Developed from financial economics in the 1970s, the no-arbitrage principle states that identical assets must trade at identical prices, adjusted for risk and time.</p>
+                        
+                        <h4>Why Arbitrage Vanishes</h4>
+                        <ul>
+                            <li>Market participants quickly identify price discrepancies</li>
+                            <li>Automated trading systems execute arbitrage strategies instantly</li>
+                            <li>Capital flows eliminate price differences within milliseconds</li>
+                        </ul>
+                    </div>
+                    <div class="interactive-demo">
+                        <h4>Interactive Arbitrage Detector</h4>
+                        <div class="arbitrage-controls">
+                            <div class="control-group">
+                                <label for="asset-price-a">Asset A Price ($):</label>
+                                <input type="number" id="asset-price-a" value="100" step="0.01">
+                            </div>
+                            <div class="control-group">
+                                <label for="asset-price-b">Asset B Price ($):</label>
+                                <input type="number" id="asset-price-b" value="100" step="0.01">
+                            </div>
+                            <div class="control-group">
+                                <label for="exchange-rate">Exchange Rate:</label>
+                                <input type="number" id="exchange-rate" value="1.0" step="0.001">
+                            </div>
+                            <button id="detect-arbitrage">Detect Arbitrage</button>
+                        </div>
+                        <div id="arbitrage-result" class="result-display"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pillar-container">
+                <h3>⚖️ Risk-Neutral Pricing</h3>
+                <p>The mathematical framework that enables derivative pricing by transforming real-world probabilities into risk-neutral measures.</p>
+                
+                <div class="concept-explanation">
+                    <div class="concept-text">
+                        <h4>Intuition Before Math</h4>
+                        <p>Risk-neutral pricing doesn't assume investors are risk-neutral. Instead, it's a mathematical technique that simplifies pricing by adjusting probabilities to account for risk preferences.</p>
+                        
+                        <div class="formula-container">
+                            <h4>Fundamental Pricing Formula</h4>
+                            <div id="risk-neutral-formula" class="math-formula"></div>
+                            <p class="formula-explanation">Price = Expected payoff under risk-neutral measure, discounted at risk-free rate</p>
+                        </div>
+                    </div>
+                    <div class="interactive-demo">
+                        <h4>Risk-Neutral Calculator</h4>
+                        <div class="pricing-controls">
+                            <div class="control-group">
+                                <label for="spot-price">Current Stock Price ($):</label>
+                                <input type="number" id="spot-price" value="100" step="0.01">
+                            </div>
+                            <div class="control-group">
+                                <label for="strike-price">Strike Price ($):</label>
+                                <input type="number" id="strike-price" value="105" step="0.01">
+                            </div>
+                            <div class="control-group">
+                                <label for="risk-free-rate">Risk-Free Rate (%):</label>
+                                <input type="number" id="risk-free-rate" value="5" step="0.1">
+                            </div>
+                            <div class="control-group">
+                                <label for="time-to-expiry">Time to Expiry (years):</label>
+                                <input type="number" id="time-to-expiry" value="0.25" step="0.01">
+                            </div>
+                            <button id="calculate-price">Calculate Option Price</button>
+                        </div>
+                        <div id="pricing-result" class="result-display"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mathematical Frameworks Section -->
+        <section id="mathematical" class="section">
+            <h2>Mathematical Frameworks</h2>
+            
+            <div class="framework-container">
+                <h3>📈 Stochastic Processes Primer</h3>
+                <p>The mathematical foundation for modeling random price movements in financial markets.</p>
+                
+                <div class="stochastic-grid">
+                    <div class="stochastic-concept">
+                        <h4>Brownian Motion</h4>
+                        <p>Continuous-time random process with independent, normally distributed increments.</p>
+                        <div id="brownian-formula" class="math-formula"></div>
+                    </div>
+                    <div class="stochastic-concept">
+                        <h4>Martingales</h4>
+                        <p>Processes where the expected future value equals the current value - no predictable drift.</p>
+                        <div id="martingale-formula" class="math-formula"></div>
+                    </div>
+                    <div class="stochastic-concept">
+                        <h4>Random Walks</h4>
+                        <p>Discrete-time processes where each step is independent and identically distributed.</p>
+                        <div id="random-walk-formula" class="math-formula"></div>
+                    </div>
+                </div>
+                
+                <div class="simulation-container">
+                    <h4>Interactive Stochastic Process Simulator</h4>
+                    <div class="simulation-controls">
+                        <div class="control-group">
+                            <label for="process-type">Process Type:</label>
+                            <select id="process-type">
+                                <option value="brownian">Brownian Motion</option>
+                                <option value="geometric">Geometric Brownian Motion</option>
+                                <option value="random-walk">Random Walk</option>
+                                <option value="mean-reverting">Mean Reverting</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label for="num-paths">Number of Paths:</label>
+                            <input type="number" id="num-paths" value="10" min="1" max="100">
+                        </div>
+                        <div class="control-group">
+                            <label for="time-steps">Time Steps:</label>
+                            <input type="number" id="time-steps" value="252" min="50" max="1000">
+                        </div>
+                        <div class="control-group">
+                            <label for="volatility">Volatility:</label>
+                            <input type="number" id="volatility" value="0.2" step="0.01" min="0.01" max="1">
+                        </div>
+                        <button id="simulate-process">Simulate Process</button>
+                    </div>
+                    <div id="stochastic-plot" class="plot-container"></div>
+                </div>
+            </div>
+
+            <div class="framework-container">
+                <h3>🌳 Discrete vs. Continuous Models</h3>
+                <p>Understanding the progression from simple binomial trees to sophisticated continuous-time models.</p>
+                
+                <div class="model-comparison">
+                    <div class="model-section">
+                        <h4>Binomial Tree Model</h4>
+                        <p>Discrete-time model where asset prices can move up or down at each time step.</p>
+                        <div class="binomial-controls">
+                            <div class="control-group">
+                                <label for="initial-price">Initial Price ($):</label>
+                                <input type="number" id="initial-price" value="100" step="0.01">
+                            </div>
+                            <div class="control-group">
+                                <label for="up-factor">Up Factor:</label>
+                                <input type="number" id="up-factor" value="1.1" step="0.01">
+                            </div>
+                            <div class="control-group">
+                                <label for="down-factor">Down Factor:</label>
+                                <input type="number" id="down-factor" value="0.9" step="0.01">
+                            </div>
+                            <div class="control-group">
+                                <label for="tree-steps">Number of Steps:</label>
+                                <input type="number" id="tree-steps" value="5" min="1" max="10">
+                            </div>
+                            <button id="generate-tree">Generate Tree</button>
+                        </div>
+                        <div id="binomial-tree" class="plot-container"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practical Applications Section -->
+        <section id="applications" class="section">
+            <h2>Practical Applications</h2>
+            
+            <div class="application-container">
+                <h3>📊 Option Pricing Example</h3>
+                <p>Step-by-step walkthrough of European call option pricing using the binomial model.</p>
+                
+                <div class="option-pricing-demo">
+                    <div class="pricing-inputs">
+                        <h4>Option Parameters</h4>
+                        <div class="control-group">
+                            <label for="option-spot">Current Stock Price ($):</label>
+                            <input type="number" id="option-spot" value="100" step="0.01">
+                        </div>
+                        <div class="control-group">
+                            <label for="option-strike">Strike Price ($):</label>
+                            <input type="number" id="option-strike" value="105" step="0.01">
+                        </div>
+                        <div class="control-group">
+                            <label for="option-time">Time to Expiry (years):</label>
+                            <input type="number" id="option-time" value="0.25" step="0.01">
+                        </div>
+                        <div class="control-group">
+                            <label for="option-rate">Risk-Free Rate (%):</label>
+                            <input type="number" id="option-rate" value="5" step="0.1">
+                        </div>
+                        <div class="control-group">
+                            <label for="option-vol">Volatility (%):</label>
+                            <input type="number" id="option-vol" value="20" step="1">
+                        </div>
+                        <button id="price-option">Price Option</button>
+                    </div>
+                    <div class="pricing-results">
+                        <div id="option-price-result" class="result-card"></div>
+                        <div id="black-scholes-comparison" class="result-card"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="application-container">
+                <h3>🛡️ Portfolio Hedging & Greeks</h3>
+                <p>Understanding how option Greeks measure risk sensitivities and enable dynamic hedging.</p>
+                
+                <div class="greeks-container">
+                    <div class="greeks-grid">
+                        <div class="greek-card">
+                            <h4>Delta (Δ)</h4>
+                            <div id="delta-formula" class="math-formula"></div>
+                            <p>Price sensitivity to underlying asset changes</p>
+                        </div>
+                        <div class="greek-card">
+                            <h4>Gamma (Γ)</h4>
+                            <div id="gamma-formula" class="math-formula"></div>
+                            <p>Rate of change of delta</p>
+                        </div>
+                        <div class="greek-card">
+                            <h4>Theta (Θ)</h4>
+                            <div id="theta-formula" class="math-formula"></div>
+                            <p>Time decay of option value</p>
+                        </div>
+                        <div class="greek-card">
+                            <h4>Vega (ν)</h4>
+                            <div id="vega-formula" class="math-formula"></div>
+                            <p>Sensitivity to volatility changes</p>
+                        </div>
+                    </div>
+                    
+                    <div class="hedging-simulator">
+                        <h4>Delta Hedging Simulator</h4>
+                        <div class="hedging-controls">
+                            <div class="control-group">
+                                <label for="hedge-spot">Initial Stock Price ($):</label>
+                                <input type="number" id="hedge-spot" value="100" step="0.01">
+                            </div>
+                            <div class="control-group">
+                                <label for="hedge-options">Options Position:</label>
+                                <input type="number" id="hedge-options" value="100" step="1">
+                            </div>
+                            <div class="control-group">
+                                <label for="hedge-frequency">Rehedge Frequency:</label>
+                                <select id="hedge-frequency">
+                                    <option value="daily">Daily</option>
+                                    <option value="hourly">Hourly</option>
+                                    <option value="continuous">Continuous</option>
+                                </select>
+                            </div>
+                            <button id="simulate-hedging">Simulate Hedging</button>
+                        </div>
+                        <div id="hedging-plot" class="plot-container"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Numerical Methods Section -->
+        <section id="numerical" class="section">
+            <h2>Numerical Methods Overview</h2>
+            
+            <div class="methods-container">
+                <h3>🎲 Monte Carlo Simulation</h3>
+                <p>Using random sampling to solve complex financial problems that lack analytical solutions.</p>
+                
+                <div class="monte-carlo-demo">
+                    <div class="mc-controls">
+                        <div class="control-group">
+                            <label for="mc-simulations">Number of Simulations:</label>
+                            <input type="number" id="mc-simulations" value="10000" min="1000" max="100000" step="1000">
+                        </div>
+                        <div class="control-group">
+                            <label for="mc-option-type">Option Type:</label>
+                            <select id="mc-option-type">
+                                <option value="european-call">European Call</option>
+                                <option value="european-put">European Put</option>
+                                <option value="asian-call">Asian Call</option>
+                                <option value="barrier-call">Barrier Call</option>
+                            </select>
+                        </div>
+                        <button id="run-monte-carlo">Run Monte Carlo</button>
+                    </div>
+                    <div id="monte-carlo-result" class="result-display"></div>
+                    <div id="monte-carlo-plot" class="plot-container"></div>
+                </div>
+            </div>
+
+            <div class="methods-container">
+                <h3>🧮 PDE Methods & Linear Algebra</h3>
+                <p>Finite difference methods for solving the Black-Scholes PDE and linear algebra for risk models.</p>
+                
+                <div class="pde-demo">
+                    <div class="pde-explanation">
+                        <h4>Black-Scholes PDE</h4>
+                        <div id="black-scholes-pde" class="math-formula"></div>
+                        <p>The fundamental partial differential equation governing option prices.</p>
+                    </div>
+                    <div class="efficiency-note">
+                        <h4>⚡ Computational Efficiency</h4>
+                        <p>In quantitative finance, computational speed directly translates to trading edge:</p>
+                        <ul>
+                            <li><strong>Latency:</strong> Microsecond advantages in high-frequency trading</li>
+                            <li><strong>Scalability:</strong> Processing thousands of instruments simultaneously</li>
+                            <li><strong>Memory:</strong> Efficient data structures for real-time calculations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market Microstructure Section -->
+        <section id="microstructure" class="section">
+            <h2>Market Microstructure & Reality Check</h2>
+            
+            <div class="microstructure-container">
+                <h3>📈 How Prices Evolve in Real Markets</h3>
+                <p>Understanding the gap between theoretical models and actual market behavior.</p>
+                
+                <div class="reality-factors">
+                    <div class="factor-card">
+                        <h4>💧 Liquidity</h4>
+                        <p>The ease of buying/selling without affecting price</p>
+                        <ul>
+                            <li>Market depth and order book dynamics</li>
+                            <li>Impact of large trades on prices</li>
+                            <li>Liquidity risk in volatile markets</li>
+                        </ul>
+                    </div>
+                    <div class="factor-card">
+                        <h4>📊 Bid-Ask Spreads</h4>
+                        <p>The cost of immediacy in trading</p>
+                        <ul>
+                            <li>Market maker compensation</li>
+                            <li>Inventory risk and adverse selection</li>
+                            <li>Spread dynamics across different assets</li>
+                        </ul>
+                    </div>
+                    <div class="factor-card">
+                        <h4>⚡ Slippage</h4>
+                        <p>The difference between expected and actual execution prices</p>
+                        <ul>
+                            <li>Market impact of large orders</li>
+                            <li>Timing risk in volatile conditions</li>
+                            <li>Implementation shortfall</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="microstructure-simulator">
+                    <h4>Order Book Simulator</h4>
+                    <div class="orderbook-controls">
+                        <div class="control-group">
+                            <label for="order-size">Order Size:</label>
+                            <input type="number" id="order-size" value="1000" step="100">
+                        </div>
+                        <div class="control-group">
+                            <label for="market-volatility">Market Volatility:</label>
+                            <input type="range" id="market-volatility" min="0.1" max="2" step="0.1" value="1">
+                        </div>
+                        <button id="simulate-order">Simulate Order</button>
+                    </div>
+                    <div id="orderbook-plot" class="plot-container"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Studies Section -->
+        <section id="case-studies" class="section">
+            <h2>Case Studies & Historical Anecdotes</h2>
+            
+            <div class="case-study-container">
+                <h3>📚 Famous Arbitrage Cases</h3>
+                <p>Learning from history: when theory meets practice and risk management.</p>
+                
+                <div class="case-studies-grid">
+                    <div class="case-study-card">
+                        <h4>🏛️ Long-Term Capital Management (1998)</h4>
+                        <div class="case-details">
+                            <p><strong>The Strategy:</strong> Convergence trading and relative value arbitrage</p>
+                            <p><strong>The Theory:</strong> Mean reversion in bond spreads and statistical arbitrage</p>
+                            <p><strong>The Reality:</strong> Extreme leverage (25:1) and correlated risks during crisis</p>
+                            <p><strong>The Lesson:</strong> Model risk, liquidity risk, and the importance of stress testing</p>
+                        </div>
+                        <button class="case-study-btn" data-case="ltcm">Explore LTCM Case</button>
+                    </div>
+                    
+                    <div class="case-study-card">
+                        <h4>💱 Covered Interest Parity Breakdown</h4>
+                        <div class="case-details">
+                            <p><strong>The Theory:</strong> Interest rate differentials should equal forward premiums</p>
+                            <p><strong>The Breakdown:</strong> Post-2008 regulatory changes and bank funding costs</p>
+                            <p><strong>The Opportunity:</strong> Persistent deviations in FX forward markets</p>
+                            <p><strong>The Lesson:</strong> Regulatory arbitrage and structural market changes</p>
+                        </div>
+                        <button class="case-study-btn" data-case="cip">Explore CIP Case</button>
+                    </div>
+                    
+                    <div class="case-study-card">
+                        <h4>⚡ Flash Crash (2010)</h4>
+                        <div class="case-details">
+                            <p><strong>The Event:</strong> 1000-point Dow drop in minutes</p>
+                            <p><strong>The Cause:</strong> Algorithmic trading and liquidity evaporation</p>
+                            <p><strong>The Impact:</strong> Circuit breakers and market structure reforms</p>
+                            <p><strong>The Lesson:</strong> Systemic risk from automated trading systems</p>
+                        </div>
+                        <button class="case-study-btn" data-case="flash">Explore Flash Crash</button>
+                    </div>
+                </div>
+                
+                <div id="case-study-detail" class="case-study-detail hidden">
+                    <div id="case-study-content"></div>
+                    <div id="case-study-simulation" class="plot-container"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Problems Section -->
+        <section id="practice" class="section">
+            <h2>Practice Problems</h2>
+            <p>Test your understanding of quantitative finance fundamentals with these interactive problems.</p>
+            
+            <div class="practice-container">
+                <div class="problem-controls">
+                    <button id="generate-problem">New Problem</button>
+                    <div class="difficulty-selector">
+                        <label>Difficulty:</label>
+                        <select id="problem-difficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                    <div class="topic-selector">
+                        <label>Topic:</label>
+                        <select id="problem-topic">
+                            <option value="all">All Topics</option>
+                            <option value="arbitrage">No-Arbitrage</option>
+                            <option value="pricing">Risk-Neutral Pricing</option>
+                            <option value="stochastic">Stochastic Processes</option>
+                            <option value="options">Option Pricing</option>
+                            <option value="greeks">Greeks & Hedging</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="problem-container">
+                    <div id="problem-statement" class="problem-text">
+                        <p>Click "New Problem" to generate a practice problem.</p>
+                    </div>
+                    
+                    <div class="solution-input">
+                        <label for="answer-input">Your Answer:</label>
+                        <input type="number" id="answer-input" step="0.0001" placeholder="Enter your answer...">
+                        <button id="check-answer">Check Answer</button>
+                    </div>
+                    
+                    <div id="problem-feedback" class="feedback hidden">
+                        <div id="feedback-message"></div>
+                        <div id="explanation" class="explanation"></div>
+                    </div>
+                </div>
+                
+                <div class="problem-history">
+                    <h3>Problem History</h3>
+                    <div id="problem-history-list" class="history-list">
+                        <p>Your solved problems will appear here.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="QuantZ 4K.png" alt="QuantZ Logo" class="footer-logo-img">
+                <p>QuantZ | Premier Quantitative Finance Club at Michigan State University</p>
+                <p class="week-info">Fall 2025 - Week 1: Foundations of Quantitative Finance</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Navigation</h3>
+                <ul>
+                    <li><a href="#welcome">Welcome & Context</a></li>
+                    <li><a href="#core-pillars">Core Pillars</a></li>
+                    <li><a href="#mathematical">Mathematical Frameworks</a></li>
+                    <li><a href="#applications">Practical Applications</a></li>
+                    <li><a href="#numerical">Numerical Methods</a></li>
+                    <li><a href="#microstructure">Market Microstructure</a></li>
+                    <li><a href="#case-studies">Case Studies</a></li>
+                    <li><a href="#practice">Practice Problems</a></li>
+                </ul>
+            </div>
+            <div class="footer-copyright">
+                <h3>About</h3>
+                <p>&copy; 2025 QuantZ. All rights reserved.</p>
+                <p>Educational content for quantitative finance learning.</p>
+                <p>Copyright Shashank Raj - <a href="https://github.com/shashoriginal" target="_blank" style="color: #0f3460;">GitHub</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="week1-script.js"></script>
+</body>
+</html>
